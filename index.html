@@ -512,7 +512,7 @@
             letter-spacing: 0;
         }
         .footer-sub {
-            font-size: var(--font-xs);
+            font-size: 24px;
             color: var(--text-muted);
             font-weight: 400;
         }
@@ -941,13 +941,13 @@
                 <button class="btn-close" onclick="closePriceModal()">✕</button>
             </div>
             <div class="price-input-group">
-                <span class="currency-symbol">₹</span>
+                <span class="currency-symbol">RS</span>
                 <input type="number" class="price-input" id="priceInput" placeholder="Price per bottle" min="0" step="0.5" inputmode="decimal">
                 <span style="font-size:var(--font-sm);color:var(--text-light);">per bottle</span>
             </div>
             <div class="price-result" id="priceResult" style="display:none;">
                 <div class="price-result-label">💵 This Month's Total</div>
-                <div class="price-result-value" id="priceResultValue">₹0</div>
+                <div class="price-result-value" id="priceResultValue">RS0</div>
             </div>
             <button class="btn-save" onclick="savePrice()">💾 Save Price</button>
         </div>
@@ -1160,7 +1160,7 @@
                 footerTotal.innerHTML = `${monthTotal} <span class="unit">bottles</span>`;
                 if (pricePerBottle > 0) {
                     const cost = monthTotal * pricePerBottle;
-                    footerSub.textContent = `≈ ₹${cost.toFixed(2)} this month (₹${pricePerBottle.toFixed(2)}/bottle)`;
+                    footerSub.textContent = `≈ RS ${cost.toFixed(2)} this month (RS ${pricePerBottle.toFixed(2)}/bottle)`;
                 } else {
                     footerSub.textContent = `${monthName} · Set price in 💰 Price to see cost`;
                 }
@@ -1442,7 +1442,7 @@
                 if (pricePerBottle > 0) {
                     summaryArea.innerHTML += `
                         <div class="summary-item" style="background:#fffbeb;border-color:#fcd34d;">
-                            <div class="summary-value" style="color:#b45309;">₹${(totalVal * pricePerBottle).toFixed(2)}</div>
+                            <div class="summary-value" style="color:#b45309;">RS ${(totalVal * pricePerBottle).toFixed(2)}</div>
                             <div class="summary-label">Total Cost</div>
                         </div>
                     `;
@@ -1475,7 +1475,7 @@
 
                 if (currentPrice > 0) {
                     resultDiv.style.display = 'block';
-                    resultValue.textContent = `₹${(monthTotal * currentPrice).toFixed(2)}`;
+                    resultValue.textContent = `RS ${(monthTotal * currentPrice).toFixed(2)}`;
                 } else {
                     resultDiv.style.display = 'none';
                 }
@@ -1491,14 +1491,15 @@
                 savePriceToStorage();
                 updatePriceResult();
                 updateFooter();
-                showToast('💰 Price saved! ₹' + pricePerBottle.toFixed(2) + '/bottle');
+                showToast('💰 Price saved! RS' + pricePerBottle.toFixed(2) + '/bottle');
                 // Update result display
                 const monthTotal = getTotalForMonth(realToday.getFullYear(), realToday.getMonth());
                 const resultDiv = document.getElementById('priceResult');
                 const resultValue = document.getElementById('priceResultValue');
+                closePriceModal()
                 if (pricePerBottle > 0) {
                     resultDiv.style.display = 'block';
-                    resultValue.textContent = `₹${(monthTotal * pricePerBottle).toFixed(2)}`;
+                    resultValue.textContent = `RS ${(monthTotal * pricePerBottle).toFixed(2)}`;
                 } else {
                     resultDiv.style.display = 'none';
                 }
